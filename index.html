@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>The Reveal - Cinematic Experience</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#e5e2e1", "surface-bright": "#3a3939", "primary": "#e9b3ff", "tertiary": "#e9c400",
+                        "surface-dim": "#131313", "surface": "#131313", "background": "#0D0D0D", "on-background": "#e5e2e1",
+                        "on-surface-variant": "#d2c1d4", "primary-container": "#c863fb", "on-primary-fixed": "#310048",
+                        "outline-variant": "#4f4352", "surface-container": "#201f1f", "on-primary": "#510074"
+                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": {
+                        "xs": "4px", "margin-desktop": "64px", "md": "24px", "gutter": "24px", "xl": "80px",
+                        "base": "8px", "lg": "48px", "sm": "12px", "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"], "body-lg": ["Montserrat"], "label-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"], "headline-md": ["Playfair Display"], "label-sm": ["Montserrat"],
+                        "display-lg": ["Playfair Display"], "display-lg-mobile": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(191, 90, 242, .4), 0 0 40px rgba(233, 179, 255, .2);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(191, 90, 242, .8), 0 0 80px rgba(233, 179, 255, .5);
+            }
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 15px rgba(233, 179, 255, .8));
+            }
+
+            15% {
+                transform: scale(1.15);
+                filter: drop-shadow(0 0 25px rgba(233, 179, 255, 1));
+            }
+
+            30% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 15px rgba(233, 179, 255, .8));
+            }
+
+            45% {
+                transform: scale(1.15);
+                filter: drop-shadow(0 0 25px rgba(233, 179, 255, 1));
+            }
+
+            60% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 15px rgba(233, 179, 255, .8));
+            }
+        }
+
+        @keyframes shake-intense {
+
+            0%,
+            100% {
+                transform: translateX(0) scale(1.02);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px) scale(1.02) rotate(-1deg);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px) scale(1.02) rotate(1deg);
+            }
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: .8;
+                transform: translateY(80vh) scale(1);
+            }
+
+            80% {
+                opacity: .8;
+                transform: translateY(20vh) scale(1);
+            }
+
+            100% {
+                transform: translateY(-20vh) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes strobe-aura {
+
+            0%,
+            100% {
+                background: radial-gradient(circle at center, rgba(233, 196, 0, .3) 0%, rgba(233, 179, 255, .1) 50%, transparent 100%);
+            }
+
+            50% {
+                background: radial-gradient(circle at center, rgba(233, 196, 0, .6) 0%, rgba(233, 179, 255, .4) 50%, transparent 100%);
+            }
+        }
+
+        @keyframes elastic-bounce {
+            0% {
+                transform: translateY(-100vh) scale(.5);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(20px) scale(1.05);
+                opacity: 1;
+            }
+
+            70% {
+                transform: translateY(-10px) scale(.95);
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-heartbeat {
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+
+        .animate-shake-intense {
+            animation: shake-intense .5s infinite ease-in-out;
+        }
+
+        .animate-strobe {
+            animation: strobe-aura 2s infinite ease-in-out;
+        }
+
+        .animate-elastic {
+            animation: elastic-bounce 1.5s cubic-bezier(.68, -.55, .26, 1.55) forwards;
+        }
+
+        .glass-panel {
+            background: rgba(26, 11, 46, .6);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(233, 196, 0, .2);
+        }
+
+        .glass-card-interactive {
+            transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+        }
+
+        .glass-card-interactive:hover {
+            transform: scale(1.02);
+            border-color: rgba(233, 196, 0, .5);
+            box-shadow: 0 0 30px rgba(191, 90, 242, .3);
+        }
+
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: float-particle linear infinite;
+        }
+
+        .phase {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease-in-out;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .phase.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            animation: fadeIn .8s ease forwards;
+        }
+
+        .text-highlight-gold {
+            color: #e9c400;
+        }
+
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+
+        .letter.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background text-on-surface min-h-screen overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+
+    <!-- FIX 1: HTML5 audio for local song.mpeg / song.mp3 file -->
+    <audio id="bg-music" loop preload="none">
+        <source src="song.mpeg" type="audio/mpeg">
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="fixed inset-0 pointer-events-none z-0" id="particles-container"></div>
+
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop py-md max-w-[1440px] mx-auto backdrop-blur-md bg-surface/10 shadow-[0_0_20px_rgba(191,90,242,0.15)] opacity-0 transition-opacity duration-1000 hidden md:flex"
+        id="top-nav">
+        <div class="font-headline-md text-headline-md text-primary drop-shadow-[0_0_10px_rgba(233,179,255,0.4)]">Lumina
+        </div>
+        <div class="flex gap-lg font-label-lg text-label-lg uppercase tracking-widest">
+            <span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Prologue</span>
+            <span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Enigma</span>
+            <span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Ascension</span>
+            <span class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Legacy</span>
+            <span class="text-primary border-b-2 border-primary pb-1 cursor-pointer">The Reveal</span>
+        </div>
+        <div class="flex gap-md text-primary">
+            <i class="cursor-pointer hover:scale-105 transition-transform duration-300" data-lucide="volume-2"
+                id="mute-btn"></i>
+            <i class="cursor-pointer hover:scale-105 transition-transform duration-300" data-lucide="user"></i>
+        </div>
+    </nav>
+
+    <!-- Phase 1: Countdown -->
+    <section class="phase active bg-background" id="phase-1">
+        <div class="flex flex-col items-center justify-center space-y-xl z-20">
+            <i class="text-primary animate-heartbeat w-32 h-32" data-lucide="heart" fill="currentColor"></i>
+            <div class="font-headline-lg text-headline-lg text-on-surface tracking-widest" id="countdown-timer">10</div>
+            <p class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-[0.2em]">Initiating
+                Sequence</p>
+        </div>
+    </section>
+
+    <!-- Phase 2: Lock Card -->
+    <section class="phase bg-surface-dim" id="phase-2">
+        <div class="w-full max-w-2xl px-margin-mobile md:px-0 z-20">
+            <div class="glass-panel glass-card-interactive rounded-xl p-xl flex flex-col items-center justify-center space-y-lg text-center cursor-pointer animate-pulse-glow group relative overflow-hidden"
+                id="unlock-card">
+                <div
+                    class="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
+                <i class="text-tertiary w-20 h-20 drop-shadow-[0_0_15px_rgba(233,196,0,0.6)] group-hover:scale-110 transition-transform duration-300"
+                    data-lucide="lock" id="lock-icon"></i>
+                <div class="space-y-sm relative z-10">
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface">The Vault is Sealed</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">A secret awaits in the
+                        midnight garden. Tap to begin the decryption sequence.</p>
+                </div>
+                <button
+                    class="relative z-10 mt-md bg-gradient-to-r from-[#9026c3] to-[#e9b3ff] text-on-primary-fixed font-label-lg text-label-lg px-xl py-md rounded-full shadow-[0_0_20px_rgba(191,90,242,0.5)] hover:shadow-[0_0_30px_rgba(233,179,255,0.8)] transition-all duration-300 transform group-hover:scale-105 uppercase tracking-widest font-bold">
+                    Tap to Unlock
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 3: Story — 7 slides -->
+    <section class="phase bg-background" id="phase-3">
+        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-screen">
+            <div class="w-full h-full bg-cover bg-center"
+                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADOdffjW2SkPP7R8JBlqNXbP0rPXP9yVUu9U85VMxH9eQx_dOwtfFUIEyUNTkbz1cO9ICeFTuL4nixn51S5Xnat5a7Pc66gYXFg3TbcszOPKT_pWnJbPCqzpqCSz0TBK79gmcU6tYN-oviSnve4ysErOt7Iv9iKS2JiXwzvnQyKMrzpPUlzt-idko4QURX9L6QkCfk-3NoLlWe-OehAnhFck4kpFYtgxzNd59D1onEH_DhKMD4MZUaoekMUYTYqFu6qA1UGgsWv8w');">
+            </div>
+        </div>
+        <div
+            class="relative z-20 w-full max-w-4xl px-margin-mobile md:px-0 h-full flex flex-col justify-center mx-auto">
+            <div class="relative w-full h-[614px] md:h-[512px]" id="slides-container">
+
+                <!-- Slide 1 (index 0) -->
+                <div class="slide active absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <div
+                        class="glass-panel rounded-xl p-xl w-full max-w-2xl shadow-[0_0_30px_rgba(191,90,242,0.15)] relative overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50">
+                        </div>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Kya tumhein pata hai...?<br>Haan... kya tumhein pata hai...<br><br>
+                            Ki duniya mein sabse alag log kaun hote hain...?<br>Pagal log... 😂<br><br>
+                            Aur sach kahun,<br>Main bhi ek aise hi "pagal" insaan se mila hoon...<br><br>
+                            Ab tum soch rahe hoge,<br>"Pagal matlab kya karta hoga woh?" 🤔<br><br>
+                            Ruko zara...<br>Abhi batata hoon... 😌
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 2 (index 1) -->
+                <div class="slide absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <div
+                        class="glass-panel rounded-xl p-xl w-full max-w-2xl shadow-[0_0_30px_rgba(191,90,242,0.15)] relative overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50">
+                        </div>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Woh insaan normal toh bilkul bhi nahi hai...<br><br>
+                            Kabhi achanak hansne lagta hai,<br>Kabhi camera dekhte hi pose maarne lagta hai...<br><br>
+                            Aur sabse khatarnak baat pata hai kya...? 😭<br><br>
+                            Jab bhi camera uski taraf ghoomta hai na...<br>Toh uski "talwar" bahar aa jaati hai!
+                            ⚔️😂<br><br>
+                            Abey daro mat...<br>Asli wali talwar nahi re baba!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 3 (index 2) -->
+                <div class="slide absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <div
+                        class="glass-panel rounded-xl p-xl w-full max-w-2xl shadow-[0_0_30px_rgba(191,90,242,0.15)] relative overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50">
+                        </div>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Pehle mujhe bhi laga tha ki<br>Yeh koi secret warrior hai...<br><br>
+                            Har baar camera dekhte hi<br>Talwar bahar nikaal deta hai! 😭<br><br>
+                            Main toh darr gaya tha ek baar...<br><br>
+                            Socha —<br>"Yeh ladki hai ya Mughal sena ka senapati?" 😂<br><br>
+                            Par baad mein pata chala...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 4 (index 3) -->
+                <div class="slide absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <div
+                        class="glass-panel rounded-xl p-xl w-full max-w-2xl shadow-[0_0_30px_rgba(191,90,242,0.15)] relative overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50">
+                        </div>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Ki uski "talwar" kuch aur nahi...<br><br>
+                            Uski jeebh hai!!! 👅😂<br><br>Haan bhai...<br><br>
+                            Jahan camera dikha,<br>Wahan jeebh bahar!<br><br>
+                            Selfie ho...<br>Video ho...<br>Ya normal photo...<br><br>
+                            Madam ki jeebh har jagah attendance laga deti hai! 😭📸
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 5 (index 4) -->
+                <div class="slide absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <div
+                        class="glass-panel rounded-xl p-xl w-full max-w-2xl shadow-[0_0_30px_rgba(191,90,242,0.15)] relative overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50">
+                        </div>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Kabhi-kabhi toh lagta hai<br>Camera bhi sochta hoga...<br><br>
+                            "Bhai photo loon ya doctor bulaun?" 😭<br><br>
+                            Aur woh chipkali jaise style mein<br>Jeebh bahar nikaal kar pose deti hai...<br><br>
+                            Jaise duniya ka sabse bada fashion trend wahi ho! 😂<br><br>
+                            Sach bataun?<br>Uski ye aadat itni funny hai na,<br>Ki gussa bhi aaye toh hasi nikal jaati
+                            hai... 😭✨
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 6 (index 5) -->
+                <div class="slide absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <div
+                        class="glass-panel rounded-xl p-xl w-full max-w-2xl shadow-[0_0_30px_rgba(191,90,242,0.15)] relative overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50">
+                        </div>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Aur ab shayad tum samajh gaye hoge...<br><br>
+                            Ki main kisi pagal insaan ki baat kyun kar raha tha...<br><br>
+                            Kyuki woh "pagal" koi aur nahi...<br><br>
+                            Tum ho. ❤️<br><br>
+                            Haan...<br>Wahi ladki jo camera dekhte hi jeebh bahar nikaal deti hai... 👅😂
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide 7 / Grand Finale (index 6) — FIX 2 -->
+                <div class="slide absolute inset-0 flex flex-col items-center justify-center text-center"
+                    id="finale-slide">
+                    <div class="absolute inset-[-50vw] z-[-1] animate-strobe mix-blend-screen opacity-0"
+                        id="finale-aura"></div>
+                    <div class="glass-panel rounded-xl p-[60px] w-full max-w-3xl border-2 border-tertiary shadow-[0_0_100px_rgba(233,196,0,0.5)] transform scale-95 opacity-0 transition-all duration-1000 ease-out"
+                        id="trophy-card">
+                        <i class="text-tertiary w-24 h-24 drop-shadow-[0_0_20px_rgba(233,196,0,0.8)] mb-lg animate-heartbeat mx-auto"
+                            data-lucide="award"></i>
+                        <h3 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-md text-highlight-gold tracking-tight"
+                            id="finale-text">
+                            The Grand Reveal
+                        </h3>
+                        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mx-auto">
+                            Ye Hansi chahiye, bas aise hi haste raho,<br><br>
+                            Mayus mat hona kyunki ye pal baar-baar nahi aayega,<br><br>
+                            Aur main bhi aise surprise card baar-baar nahi bana sakta!<br><br>
+                            Toh please aap sad mat ho,<br>
+                            Yahi smile rakhna hamesha apne chehre pe...<br><br>
+                            Kyunki sadness me tum bilkul chudel lagti ho,<br>
+                            Aur is smile me tum bilkul insan lagti ho! 🤣✨
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Navigation — 7 dots (0 to 6) -->
+            <div class="flex justify-center items-center gap-xl mt-xl z-30" id="story-nav">
+                <button
+                    class="text-on-surface-variant hover:text-primary hover:drop-shadow-[0_0_10px_rgba(233,179,255,0.8)] transition-all duration-300 disabled:opacity-30 p-sm"
+                    id="btn-prev">
+                    <i class="w-8 h-8" data-lucide="arrow-left"></i>
+                </button>
+                <div class="flex gap-sm" id="slide-indicators">
+                    <div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_5px_#e9b3ff] transition-all duration-300"
+                        id="dot-0"></div>
+                    <div class="w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300" id="dot-1">
+                    </div>
+                    <div class="w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300" id="dot-2">
+                    </div>
+                    <div class="w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300" id="dot-3">
+                    </div>
+                    <div class="w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300" id="dot-4">
+                    </div>
+                    <div class="w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300" id="dot-5">
+                    </div>
+                    <div class="w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300" id="dot-6">
+                    </div>
+                </div>
+                <button
+                    class="text-on-surface-variant hover:text-primary hover:drop-shadow-[0_0_10px_rgba(233,179,255,0.8)] transition-all duration-300 p-sm"
+                    id="btn-next">
+                    <i class="w-8 h-8" data-lucide="arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer
+        class="fixed bottom-0 w-full z-30 flex justify-between items-center px-margin-desktop py-base opacity-60 bg-gradient-to-t from-background to-transparent hidden md:flex">
+        <div class="font-headline-lg text-headline-lg text-primary">Lumina</div>
+        <div class="font-label-sm text-label-sm text-on-surface-variant flex gap-md">
+            <span class="hover:text-tertiary transition-colors cursor-pointer">Privacy</span>
+            <span class="hover:text-tertiary transition-colors cursor-pointer">Terms</span>
+            <span class="hover:text-tertiary transition-colors cursor-pointer">Support</span>
+        </div>
+        <div class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Midnight Garden. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Particles
+        (function createParticles() {
+            const container = document.getElementById('particles-container');
+            const colors = ['#e9b3ff', '#e9c400'];
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                const size = Math.random() * 4 + 2, color = colors[Math.random() > .5 ? 0 : 1];
+                p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random() * 100}vw;background-color:${color};box-shadow:0 0 ${size * 2}px ${color};animation-delay:${Math.random() * 10}s;animation-duration:${Math.random() * 10 + 10}s;`;
+                container.appendChild(p);
+            }
+        })();
+
+        const phase1 = document.getElementById('phase-1'),
+            phase2 = document.getElementById('phase-2'),
+            phase3 = document.getElementById('phase-3'),
+            topNav = document.getElementById('top-nav'),
+            bgMusic = document.getElementById('bg-music'),
+            muteBtn = document.getElementById('mute-btn');
+
+        // Mute toggle
+        if (muteBtn) muteBtn.addEventListener('click', () => { bgMusic.muted = !bgMusic.muted; });
+
+        // Phase 1: Countdown
+        let count = 10;
+        const countdownEl = document.getElementById('countdown-timer');
+        const timer = setInterval(() => {
+            count--;
+            countdownEl.textContent = count;
+            if (count <= 0) { clearInterval(timer); transitionToPhase2(); }
+        }, 1000);
+
+        function transitionToPhase2() {
+            phase1.classList.remove('active');
+            setTimeout(() => phase2.classList.add('active'), 1000);
+        }
+
+        // Phase 2: Unlock click
+        const unlockCard = document.getElementById('unlock-card'),
+            lockIcon = document.getElementById('lock-icon');
+
+        unlockCard.addEventListener('click', () => {
+            // Play local audio
+            bgMusic.play().catch(e => console.warn('Audio blocked:', e));
+
+            unlockCard.classList.remove('animate-pulse-glow', 'glass-card-interactive');
+            unlockCard.classList.add('animate-shake-intense');
+
+            setTimeout(() => {
+                const ni = document.createElement('i');
+                ni.setAttribute('data-lucide', 'unlock');
+                ni.className = 'text-primary w-20 h-20 drop-shadow-[0_0_15px_rgba(233,179,255,0.6)] transition-transform duration-300';
+                lockIcon.replaceWith(ni);
+                lucide.createIcons();
+            }, 500);
+
+            setTimeout(() => {
+                unlockCard.classList.remove('animate-shake-intense');
+                fireConfetti();
+                transitionToPhase3();
+            }, 10000);
+        });
+
+        function transitionToPhase3() {
+            phase2.classList.remove('active');
+            setTimeout(() => { phase3.classList.add('active'); topNav.classList.remove('opacity-0'); }, 1000);
+        }
+
+        // Confetti
+        function fireConfetti() {
+            const container = document.getElementById('particles-container');
+            for (let i = 0; i < 100; i++) {
+                const c = document.createElement('div');
+                c.style.cssText = `position:fixed;left:50%;top:50%;width:10px;height:10px;background-color:${Math.random() > .5 ? '#e9c400' : '#e9b3ff'};z-index:9999;transition:all 1.5s cubic-bezier(.25,1,.5,1);border-radius:${Math.random() > .5 ? '50%' : '0'};`;
+                const angle = Math.random() * Math.PI * 2, dist = Math.random() * 500 + 200;
+                container.appendChild(c);
+                c.getBoundingClientRect();
+                c.style.transform = `translate(calc(-50% + ${Math.cos(angle) * dist}px),calc(-50% + ${Math.sin(angle) * dist}px)) rotate(${Math.random() * 720}deg)`;
+                c.style.opacity = '0';
+                setTimeout(() => c.remove(), 1500);
+            }
+        }
+
+        // ============================================================
+        // FIX: 7 slides (index 0-6), finale at index 6, 7 dots (dot-0 to dot-6)
+        // ============================================================
+        const slides = document.querySelectorAll('.slide');
+        const btnPrev = document.getElementById('btn-prev'),
+            btnNext = document.getElementById('btn-next');
+        const TOTAL = slides.length;      // 7
+        const FINALE = TOTAL - 1;           // 6
+        let current = 0;
+
+        function updateSlides() {
+            slides.forEach((s, i) => { i === current ? s.classList.add('active') : s.classList.remove('active'); });
+
+            for (let i = 0; i < TOTAL; i++) {
+                const dot = document.getElementById('dot-' + i);
+                if (!dot) continue;
+                dot.className = i === current
+                    ? "w-2 h-2 rounded-full bg-primary shadow-[0_0_5px_#e9b3ff] transition-all duration-300"
+                    : "w-2 h-2 rounded-full bg-on-surface-variant/30 transition-all duration-300";
+            }
+
+            btnPrev.disabled = (current === 0);
+            if (current === FINALE) { btnNext.style.display = 'none'; triggerFinale(); }
+            else { btnNext.style.display = 'block'; resetFinale(); }
+        }
+
+        function triggerFinale() {
+            const aura = document.getElementById('finale-aura'),
+                trophy = document.getElementById('trophy-card'),
+                fText = document.getElementById('finale-text');
+            fireConfetti();
+            setTimeout(() => {
+                aura.classList.remove('opacity-0');
+                trophy.classList.remove('scale-95', 'opacity-0');
+                trophy.classList.add('animate-elastic');
+                const txt = fText.innerText;
+                fText.innerHTML = '';
+                [...txt].forEach((ch, i) => {
+                    const sp = document.createElement('span');
+                    sp.innerText = ch === ' ' ? '\u00A0' : ch;
+                    sp.className = 'letter';
+                    sp.style.transitionDelay = `${i * .1}s`;
+                    fText.appendChild(sp);
+                    setTimeout(() => sp.classList.add('visible'), 100);
+                });
+            }, 500);
+        }
+
+        function resetFinale() {
+            const aura = document.getElementById('finale-aura'),
+                trophy = document.getElementById('trophy-card');
+            if (aura && trophy) {
+                aura.classList.add('opacity-0');
+                trophy.classList.remove('animate-elastic');
+                trophy.classList.add('scale-95', 'opacity-0');
+            }
+        }
+
+        btnNext.addEventListener('click', () => { if (current < TOTAL - 1) { current++; updateSlides(); } });
+        btnPrev.addEventListener('click', () => { if (current > 0) { current--; updateSlides(); } });
+
+        updateSlides();
+    </script>
+</body>
+
+</html>
